@@ -2,6 +2,7 @@ eval(require("fs").readFileSync("login/api.js")+"");
 
 it("prompts login", function() {
     try {
-        await login();
+        var token = await login();
+        expect(token).not.toBe(undefined);
     }
 });
