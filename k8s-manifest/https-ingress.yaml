@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: traffic-router
+spec:
+  rules:
+  # - host
+    - http:
+        paths:
+          - path: /
+            backend:
+              serviceName: lobby-service
+              servicePort: 80
+          - path: /login
+            backend:
+              serviceName: lobby-service
+              servicePort: 43770
+          - path: /matchmaker
+            backend:
+              serviceName: lobby-service
+              servicePort: 4444
+          - path: /baseball-game
+            backend:
+              serviceName: ingame-service
+              servicePort: 8888
+          - path: /rankboard
+            backend:
+              serviceName: rank-storage-service
+              servicePort: 1111
