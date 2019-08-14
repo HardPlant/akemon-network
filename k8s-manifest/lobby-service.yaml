@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: lobby-service
+spec:
+  type: ClusterIP
+  selector:
+    app: lobby
+  ports:
+  - name: login
+    port: 43770
+    targetPort: 43770
+  - name: matchmaker
+    port: 4444
+    targetPort: 4444
