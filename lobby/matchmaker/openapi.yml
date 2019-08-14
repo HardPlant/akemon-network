@@ -1,0 +1,13 @@
+openapi: '3.0.2'
+info:
+  title: matchmaker
+  version: '1.0'
+servers:
+  - url: https://baseball.themirai.net/matchmaker/v1/
+paths:
+  /match:
+    get:
+      description: "Pulling 방식으로 match를 신청한다."
+      responses:
+        '200':
+          description: OK

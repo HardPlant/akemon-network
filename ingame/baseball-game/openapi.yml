@@ -1,0 +1,17 @@
+openapi: '3.0.2'
+info:
+  title: baseball-game
+  version: '1.0'
+servers:
+  - url: https://baseball.themirai.net/baseball-game/v1/
+paths:
+  /enroll:
+    get:
+      responses:
+        '200':
+          description: OK
+  /guess:
+    post:
+      responses:
+        '200':
+          description: OK
