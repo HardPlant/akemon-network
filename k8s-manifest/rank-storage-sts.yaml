@@ -23,6 +23,9 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 1111
+        volumeMounts:
+          - name : redis-volume
+            mountPath: /var/redis
   volumeClaimTemplates:
     - metadata:
         name: redis-volume
