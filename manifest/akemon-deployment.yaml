@@ -13,6 +13,6 @@ spec:
     spec:
       containers:
       - name: akemon
-        image: akemon-redis
+        image: hardplant/akemon-redis
         ports:
         - containerPort: 8080
