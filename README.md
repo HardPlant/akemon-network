@@ -15,9 +15,14 @@ Pod가 4개라면 Deployment도 4개
 
 상태가 있는 Pod라면 Deployment 대신 StatefulSet으로 관리해야 함
 
+##### StatefulSet
+
+Deployment에서 Kind를 바꿔주고 Volume을 추가해주는 것으로 사용 가능함
+
 ##### Service
 
 Pod의 label들을 읽어 외부 포트를 할당함
+
 
 ### Pod의 용량 작성
 
