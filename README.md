@@ -19,6 +19,32 @@ Pod가 4개라면 Deployment도 4개
 
 Pod의 label들을 읽어 외부 포트를 할당함
 
+### Pod의 용량 작성
+
+[참고자료](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/)
+
+```
+spec.containers[].resources.limits.cpu
+spec.containers[].resources.limits.memory
+spec.containers[].resources.requests.cpu
+spec.containers[].resources.requests.memory
+```
+
+##### CPU
+
+* 하나의 AWS vCPU, GCP Core를 말함
+
+* 0~1 사이의 값 (0.5 === 50%)
+
+0.1 === 100m (100milli)
+
+##### memory
+
+K, M, G, T, P, E로 작성 가능 (ex) 1M = 10^6Byte)
+i를 붙이면 2승 (ex) 1Mi = 2^20Byte = 1024KiB
+
+### Volume의 용량 작성
+
 ### 단일 Pod
 
 ### 여러 Pod

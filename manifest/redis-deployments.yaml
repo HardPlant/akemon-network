@@ -17,9 +17,15 @@ spec:
         image: redis:5.0.5-alpine
         resources:
           requests:
-            memory: "32Mi"
-            cpu: "100m"
+            memory: "400Mi"
+            cpu: "0.1"
         ports:
         - containerPort: 6379
     volumeClaimTemplates:
-      
+      - metadata:
+          name: redis-volume
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 500m
