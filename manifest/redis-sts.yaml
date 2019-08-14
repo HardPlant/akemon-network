@@ -21,11 +21,11 @@ spec:
             cpu: "0.1"
         ports:
         - containerPort: 6379
-    volumeClaimTemplates:
-      - metadata:
-          name: redis-volume
-        spec:
-          accessModes: ["ReadWriteOnce"]
-          resources:
-            requests:
-              storage: 500m
+  volumeClaimTemplates:
+    - metadata:
+        name: redis-volume
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 500m
