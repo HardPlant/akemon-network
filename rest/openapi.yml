@@ -3,7 +3,7 @@ info:
   title: akemon-net
   version: '1.0'
 servers:
-  - url: https://api.server.test/v1
+  - url: https://akemon.themirai.net/v1
 paths:
   /test:
     get:
