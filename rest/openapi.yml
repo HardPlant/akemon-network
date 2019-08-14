@@ -5,9 +5,8 @@ info:
 servers:
   - url: https://akemon.themirai.net/v1
 paths:
-  /test:
+  /room:
     get:
       responses:
         '200':
           description: OK
-  

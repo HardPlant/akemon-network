@@ -1,0 +1,1 @@
+openapi-gen generate -i openapi.yml -g spring -o server
