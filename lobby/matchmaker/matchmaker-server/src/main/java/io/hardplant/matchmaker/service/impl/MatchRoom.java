@@ -38,7 +38,7 @@ public class MatchRoom {
 		return 0;
 	}
 	
-	public void register() {
+	public void register(String session) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -1,6 +1,9 @@
 package io.hardplant.matchmaker.service.impl;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -15,6 +18,7 @@ public class MatchmakerServiceImpl implements MatchmakerSerivce {
 	public String registerAndMatch(String session) {
 		
 		Map<Integer, MatchRoom> registerScore = new HashMap<Integer, MatchRoom>(); 
+		MatchRoom matchedRoom;
 		
 		for (MatchRoom room : roomPool.values()) {
 			if (room.isRegisterable(session)) {		
@@ -22,8 +26,13 @@ public class MatchmakerServiceImpl implements MatchmakerSerivce {
 			}
 		}
 		
+		Integer[] scoreArray = (Integer[]) registerScore.keySet().toArray();
+		Arrays.sort(scoreArray);
 		
+		matchedRoom = registerScore.get(scoreArray[scoreArray.length - 1]);
 		
-		return session;
+		matchedRoom.register(session);
+		
+		return matchedRoom.getRoomId();
 	}
 }
