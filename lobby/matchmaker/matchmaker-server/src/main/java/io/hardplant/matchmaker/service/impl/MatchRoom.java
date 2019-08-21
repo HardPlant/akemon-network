@@ -1,0 +1,32 @@
+package io.hardplant.matchmaker.service.impl;
+
+import java.security.SecureRandom;
+import java.util.Base64;
+
+public class MatchRoom {
+	
+	String roomId;
+	int requiredPlayerCount;
+	
+	public MatchRoom() {
+		
+		SecureRandom random = new SecureRandom();
+		
+		String time = Long.toString(random.nextLong());
+		
+		this.roomId = Base64.getEncoder().encodeToString(time.getBytes());
+	}
+
+	public String getRoomId() {
+		return roomId;
+	}
+
+	public int getRequiredPlayerCount() {
+		return requiredPlayerCount;
+	}
+
+	public void setRequiredPlayerCount(int requiredPlayerCount) {
+		this.requiredPlayerCount = requiredPlayerCount;
+	}
+	
+}
