@@ -7,7 +7,7 @@ servers:
 paths:
   /match:
     get:
-      description: "Pulling 방식으로 match를 신청한다."
+      description: "register and match"
       responses:
         '200':
           description: OK
