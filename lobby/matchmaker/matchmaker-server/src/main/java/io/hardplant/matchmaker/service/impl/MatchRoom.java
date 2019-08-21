@@ -1,20 +1,25 @@
 package io.hardplant.matchmaker.service.impl;
 
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 public class MatchRoom {
 	
 	String roomId;
-	int requiredPlayerCount;
+	List<String> sessions;
+	
+	int currentPlayer 		= 0;
+	int requiredPlayerCount = 2;
 	
 	public MatchRoom() {
-		
 		SecureRandom random = new SecureRandom();
 		
 		String time = Long.toString(random.nextLong());
 		
 		this.roomId = Base64.getEncoder().encodeToString(time.getBytes());
+		this.sessions = new ArrayList<String>();
 	}
 
 	public String getRoomId() {
@@ -24,13 +29,9 @@ public class MatchRoom {
 	public int getRequiredPlayerCount() {
 		return requiredPlayerCount;
 	}
-
-	public void setRequiredPlayerCount(int requiredPlayerCount) {
-		this.requiredPlayerCount = requiredPlayerCount;
-	}
 	
 	public boolean isRegisterable(String session) {
-		return true;
+		return currentPlayer < requiredPlayerCount;
 	}
 
 	public int getRegisterScore() {
@@ -39,8 +40,14 @@ public class MatchRoom {
 	}
 	
 	public void register(String session) {
-		// TODO Auto-generated method stub
-		
+		this.sessions.add(session);
+		currentPlayer++;
+	}
+	
+	public void unregister(String session) {
+		if ( this.sessions.remove(session) ) {
+			currentPlayer--;
+		}
 	}
 
 	public boolean isMatched() {
