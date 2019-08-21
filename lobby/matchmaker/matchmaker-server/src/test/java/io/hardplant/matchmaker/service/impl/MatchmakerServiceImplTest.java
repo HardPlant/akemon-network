@@ -37,9 +37,8 @@ public class MatchmakerServiceImplTest {
 	public void testMatch() throws InterruptedException {
 		MatchmakerServiceImpl matchmakerService = new MatchmakerServiceImpl();
 		Map<String, MatchRoom> roomPool = matchmakerService.roomPool;
-		String session = "a";
 		
-		matchmakerService.register(session);
+		matchmakerService.register("a");
 		WaitForMatch wfm = new WaitForMatch(matchmakerService, "a");
 		wfm.start();
 		
