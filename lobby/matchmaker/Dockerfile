@@ -1,5 +1,11 @@
-FROM openjdk:8-alpine
+FROM maven:3.6.1-jdk-8-alpine
+COPY matchmaker-server /tmp/matchmaker-server
+WORKDIR /tmp/matchmaker-server
 
-COPY . /var/app
+RUN mvn install
 
-CMD ["java", "-jar", "/var/app/app.java"]
+FROM openjdk:8-jre-slim
+
+COPY --from=0 /tmp/matchmaker-server/target/matchmaker-server-0.0.1-SNAPSHOT.jar /var/app
+
+CMD ["java", "-jar", "/var/app/app.jar"]
