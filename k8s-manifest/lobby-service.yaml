@@ -7,9 +7,12 @@ spec:
   selector:
     app: lobby
   ports:
-  - name: login
-    port: 43770
-    targetPort: 43770
+  - name: web
+    port: 8080
+    targetPort: 80
+  - name: web
+    port: 8443
+    targetPort: 443
   - name: matchmaker
-    port: 4444
+    port: 8080
     targetPort: 4444

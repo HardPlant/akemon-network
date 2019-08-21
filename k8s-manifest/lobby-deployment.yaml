@@ -22,7 +22,7 @@ spec:
             memory: "128Mi"
             cpu: "500m"
         ports:
-        - containerPort: 43770
+        - containerPort: 8080
       - name: matchmaker
         image: hardplant/matchmaker
         resources:
@@ -33,4 +33,4 @@ spec:
             memory: "128Mi"
             cpu: "500m"
         ports:
-        - containerPort: 4444
+        - containerPort: 8080
