@@ -29,4 +29,18 @@ public class MatchRoom {
 		this.requiredPlayerCount = requiredPlayerCount;
 	}
 	
+	public boolean isRegisterable(String session) {
+		return true;
+	}
+
+	public int getRegisterScore() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	public void register() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
