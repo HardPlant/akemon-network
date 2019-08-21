@@ -3,16 +3,16 @@ kind: Service
 metadata:
   name: lobby-service
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: lobby
   ports:
   - name: web
-    port: 8080
-    targetPort: 80
-  - name: web
+    port: 80
+    targetPort: 8080
+  - name: web-https
     port: 8443
     targetPort: 443
   - name: matchmaker
     port: 8080
-    targetPort: 4444
+    targetPort: 8080
