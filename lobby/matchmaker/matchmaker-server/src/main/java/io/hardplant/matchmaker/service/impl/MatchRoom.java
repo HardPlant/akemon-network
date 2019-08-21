@@ -39,9 +39,11 @@ public class MatchRoom {
 		return 0;
 	}
 	
-	public void register(String session) {
-		this.sessions.add(session);
-		currentPlayer++;
+	public synchronized void register(String session) {
+		if (currentPlayer < requiredPlayerCount) {
+			this.sessions.add(session);
+			currentPlayer++;			
+		}			
 	}
 	
 	public void unregister(String session) {
@@ -51,8 +53,7 @@ public class MatchRoom {
 	}
 
 	public boolean isMatched() {
-		// TODO Auto-generated method stub
-		return false;
+		return currentPlayer == requiredPlayerCount;
 	}
 
 }

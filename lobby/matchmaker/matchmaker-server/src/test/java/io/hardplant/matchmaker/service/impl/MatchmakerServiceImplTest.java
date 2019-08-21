@@ -1,6 +1,10 @@
 package io.hardplant.matchmaker.service.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.Map;
 
@@ -28,19 +32,51 @@ public class MatchmakerServiceImplTest {
 		assertNotEquals(roomPool.get("b"),roomPool.get("c"));
 		
 	}
-
-	public class MultiService implements Runnable {
+	
+	@Test
+	public void testMatch() throws InterruptedException {
+		MatchmakerServiceImpl matchmakerService = new MatchmakerServiceImpl();
+		Map<String, MatchRoom> roomPool = matchmakerService.roomPool;
+		String session = "a";
+		
+		matchmakerService.register(session);
+		WaitForMatch wfm = new WaitForMatch(matchmakerService, "a");
+		wfm.start();
+		
+		assertFalse(roomPool.get("a").isMatched());
+		
+		matchmakerService.register("b");
+		WaitForMatch wfmB = new WaitForMatch(matchmakerService, "b");
+		wfmB.start();
+		
+		wfm.join();
+		wfmB.join();
+		
+		assertTrue(roomPool.get("a").isMatched());
+		assertTrue(wfm.matched);
+		assertTrue(wfmB.matched);
+		
+	}
+	
+	public class WaitForMatch extends Thread {
 
 		private MatchmakerServiceImpl matchmakerService;
+		private String session;
+		private boolean matched;
 
-		public MultiService(MatchmakerServiceImpl mms) {
+		public WaitForMatch(MatchmakerServiceImpl mms, String session) {
 			this.matchmakerService = mms;
+			this.session = session;
 		}
 
 		@Override
 		public void run() {
-			// TODO Auto-generated method stub
-			
+			try {
+				this.matchmakerService.match(this.session);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			this.matched = true;
 		}
 		
 	}

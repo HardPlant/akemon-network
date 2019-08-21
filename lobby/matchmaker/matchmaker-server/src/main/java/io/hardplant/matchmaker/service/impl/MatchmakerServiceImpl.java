@@ -56,7 +56,7 @@ public class MatchmakerServiceImpl implements MatchmakerSerivce {
 		}
 		
 		while ( !matchedRoom.isMatched() ) {
-			Thread.sleep(100);						
+			Thread.sleep(100);
 		}
 			
 		return matchedRoom;
