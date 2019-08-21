@@ -43,4 +43,9 @@ public class MatchRoom {
 		
 	}
 
+	public boolean isMatched() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

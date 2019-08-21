@@ -15,7 +15,7 @@ public class MatchmakerServiceImpl implements MatchmakerSerivce {
 
 	Map<String, MatchRoom> roomPool;
 	
-	public String registerAndMatch(String session) {
+	public String register(String session) {
 		
 		Map<Integer, MatchRoom> registerScore = new HashMap<Integer, MatchRoom>(); 
 		MatchRoom matchedRoom;
@@ -26,13 +26,36 @@ public class MatchmakerServiceImpl implements MatchmakerSerivce {
 			}
 		}
 		
+		if (registerScore.size() == 0) {
+			MatchRoom newRoom = new MatchRoom();
+			
+			roomPool.put(session, newRoom);
+			registerScore.put(Integer.MAX_VALUE, newRoom);
+		}
+		
 		Integer[] scoreArray = (Integer[]) registerScore.keySet().toArray();
 		Arrays.sort(scoreArray);
 		
 		matchedRoom = registerScore.get(scoreArray[scoreArray.length - 1]);
 		
 		matchedRoom.register(session);
+		roomPool.put(session, matchedRoom);
 		
 		return matchedRoom.getRoomId();
+	}
+	
+	public MatchRoom match(String session) throws InterruptedException {
+		
+		MatchRoom matchedRoom = roomPool.get(session);
+		
+		if (matchedRoom == null) {
+			return null;
+		}
+		
+		while ( !matchedRoom.isMatched() ) {
+			Thread.sleep(100);						
+		}
+			
+		return matchedRoom;
 	}
 }
