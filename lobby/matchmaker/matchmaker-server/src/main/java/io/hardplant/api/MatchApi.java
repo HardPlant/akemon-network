@@ -40,7 +40,7 @@ public interface MatchApi {
         @ApiResponse(code = 200, message = "OK") })
     @RequestMapping(value = "/match",
         method = RequestMethod.GET)
-    default ResponseEntity<Void> matchGet() {
+    default ResponseEntity<String> matchGet() {
     	
     	
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
