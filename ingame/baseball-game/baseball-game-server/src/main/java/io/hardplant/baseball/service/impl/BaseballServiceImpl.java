@@ -1,9 +1,13 @@
 package io.hardplant.baseball.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
+
+import com.google.common.collect.Lists;
 
 import io.hardplant.baseball.service.BaseballService;
 
@@ -12,11 +16,34 @@ public class BaseballServiceImpl implements BaseballService {
 	
 	private static final int BASEBALL_MAX_PLAYERS = 2;
 	
-	public Map<String, BaseballGame> gamePool;
+	public Map<String, BaseballGame> gamePool; // playerToken, baseballToken
+	public Map<String, List<String>> roomPool; // roomToken, playerToken
 
 	public BaseballServiceImpl() {
 		
 		gamePool = new HashMap<String, BaseballGame>();
+		roomPool = new HashMap<String, List<String>>();
+	}
+	
+	public String join(String roomToken, String session) {
+		
+		if (roomPool.get(roomToken) == null) {
+			roomPool.put(roomToken, new ArrayList<String>());
+		}
+		
+		List<String> room = roomPool.get(roomToken);
+		
+		room.add(session);
+		
+		if (room.size() == BASEBALL_MAX_PLAYERS) {
+			this.newGame(room.toArray(new String[] {}));
+			
+			for(String token : roomPool.keySet()) {
+				roomPool.remove(token);
+			}
+		}
+
+		return roomToken;
 	}
 	
 	public BaseballGame newGame(String[] playerTokens) {

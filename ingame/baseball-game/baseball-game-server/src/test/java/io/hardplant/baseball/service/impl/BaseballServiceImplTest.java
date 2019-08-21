@@ -20,6 +20,24 @@ public class BaseballServiceImplTest {
 
 	
 	@Test
+	public void testMatches() {
+		BaseballServiceImpl baseballService = new BaseballServiceImpl();
+		
+		String roomToken = "abc";
+		String playerA = "a";
+		String playerB = "b";
+		
+		baseballService.join(roomToken, playerA);
+		
+		assertEquals(baseballService.roomPool.size(), 1);
+		
+		baseballService.join(roomToken, playerB);
+		
+		assertEquals(baseballService.gamePool.size(), 2);
+		assertEquals(baseballService.roomPool.size(), 0);
+	}
+	
+	@Test
 	public void testNewGame() {
 		BaseballService baseballService = new BaseballServiceImpl();
 		
