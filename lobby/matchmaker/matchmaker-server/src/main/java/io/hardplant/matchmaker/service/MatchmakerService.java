@@ -2,7 +2,7 @@ package io.hardplant.matchmaker.service;
 
 import io.hardplant.matchmaker.service.impl.MatchRoom;
 
-public interface MatchmakerSerivce {
+public interface MatchmakerService {
 
 	String register(String session);
 

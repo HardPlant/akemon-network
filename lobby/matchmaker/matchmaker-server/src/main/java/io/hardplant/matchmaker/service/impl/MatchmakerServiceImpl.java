@@ -6,10 +6,10 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import io.hardplant.matchmaker.service.MatchmakerSerivce;
+import io.hardplant.matchmaker.service.MatchmakerService;
 
 @Service
-public class MatchmakerServiceImpl implements MatchmakerSerivce {
+public class MatchmakerServiceImpl implements MatchmakerService {
 
 	Map<String, MatchRoom> roomPool;
 	
