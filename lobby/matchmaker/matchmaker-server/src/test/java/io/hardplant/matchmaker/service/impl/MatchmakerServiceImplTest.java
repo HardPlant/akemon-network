@@ -57,6 +57,46 @@ public class MatchmakerServiceImplTest {
 		
 	}
 	
+	@Test
+	public void testManyMatch() throws InterruptedException {
+		MatchmakerServiceImpl matchmakerService = new MatchmakerServiceImpl();
+		Map<String, MatchRoom> roomPool = matchmakerService.roomPool;
+		
+		matchmakerService.register("a");
+		WaitForMatch wfm = new WaitForMatch(matchmakerService, "a");
+		wfm.start();
+		
+		matchmakerService.register("b");
+		WaitForMatch wfmB = new WaitForMatch(matchmakerService, "b");
+		wfmB.start();
+		
+		matchmakerService.register("c");
+		WaitForMatch wfmC = new WaitForMatch(matchmakerService, "c");
+		wfmC.start();
+		
+		matchmakerService.register("d");
+		WaitForMatch wfmD = new WaitForMatch(matchmakerService, "d");
+		wfmD.start();
+		
+		wfm.join();
+		wfmB.join();
+		
+		wfmC.join();
+		wfmD.join();
+		
+		assertTrue(roomPool.get("a").isMatched());
+		assertTrue(roomPool.get("b").isMatched());
+		assertTrue(wfm.matched);
+		assertTrue(wfmB.matched);
+
+		assertTrue(roomPool.get("c").isMatched());
+		assertTrue(roomPool.get("d").isMatched());
+		assertTrue(wfmC.matched);
+		assertTrue(wfmD.matched);
+		
+		assertNotEquals(roomPool.get("a"), roomPool.get("c"));
+		assertNotEquals(roomPool.get("b"), roomPool.get("d"));
+	}
 	public class WaitForMatch extends Thread {
 
 		private MatchmakerServiceImpl matchmakerService;
