@@ -6,6 +6,6 @@ RUN mvn install
 
 FROM openjdk:8-jre-slim
 
-COPY --from=0 /tmp/matchmaker-server/target/matchmaker-server-0.0.1-SNAPSHOT.jar /var/app
+COPY --from=0 /tmp/matchmaker-server/target/matchmaker-server-0.0.1-SNAPSHOT.jar /var/app/app.jar
 
-CMD ["java", "-jar", "/var/app/matchmaker-server-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "/var/app/app.jar"]
