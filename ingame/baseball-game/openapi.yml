@@ -5,13 +5,13 @@ info:
 servers:
   - url: https://baseball.themirai.net/baseball-game/v1/
 paths:
-  /enroll:
+  /game:
     get:
       responses:
         '200':
           description: OK
-  /guess:
-    post:
+  /{gameId}/guess:
+    get:
       responses:
         '200':
-          description: OK
+          description: OKku
