@@ -10,3 +10,4 @@ spec:
   - name: baseball-game
     port: 8888
     targetPort: 8888
+  loadBalancerIP: 
