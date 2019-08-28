@@ -5,6 +5,7 @@ class Sidebar extends Component {
         super(props);
         this.state = {}
     }
+    
     render() {
         return (
             <div className="sidebar sidebar-style-2">
